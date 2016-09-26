@@ -95,15 +95,15 @@ class ProjectController(app_manager.RyuApp):
         """
         print "switch_features_handler is called"
         #TODO: 1) Get the datapath (switch) from the ev object
-	datapath = 
+        datapath =
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         #TODO: 1) Why do you think we need the empty Match?
         #TODO: 1) Why is it call "table-miss flow entry"?
-	match = parser.OFPMatch()
+        match = parser.OFPMatch()
         actions = [parser.OFPActionOutput(ofproto.OFPP_CONTROLLER, ofproto.OFPCML_NO_BUFFER)]
         inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS , actions)]
-	#TODO: 1) Why is the priority zero here?
+        #TODO: 1) Why is the priority zero here?
         mod = datapath.ofproto_parser.OFPFlowMod(
         datapath=datapath, match=match, cookie=0,
         command=ofproto.OFPFC_ADD, idle_timeout=0, hard_timeout=0,
@@ -114,10 +114,10 @@ class ProjectController(app_manager.RyuApp):
         """
         This function creates the packet that is going to be sent to the switch
         :type datapath: ryu.controller.controller.Datapath
-        :type buffer_id: string - ID assigned by datapath
+        :type buffer_id: integer - ID assigned by datapath
         :type src_port: integer - source port
-	:type dst_port: integer- output port
-	:type data: Packet data of a binary type value or an instances of packet.Packet.
+        :type dst_port: integer- output port
+        :type data: Packet data of a binary type value or an instances of packet.Packet.
         :return: packet to be sent 
         :rtype: OFPPacketOut
         """
@@ -140,10 +140,10 @@ class ProjectController(app_manager.RyuApp):
         """
         This function sents the packet to the corresponding switch 
         :type datapath: ryu.controller.controller.Datapath
-        :type buffer_id: string - ID assigned by datapath
+        :type buffer_id: integer - ID assigned by datapath
         :type src_port: integer - source port
-	:type dst_port: integer- output port
-	:type data: Packet data of a binary type value or an instances of packet.Packet.
+        :type dst_port: integer- output port
+        :type data: Packet data of a binary type value or an instances of packet.Packet.
         :return: packet to be sent 
         :rtype: OFPPacketOut
         """
@@ -184,7 +184,7 @@ class ProjectController(app_manager.RyuApp):
         in_port = msg.match['in_port']
 
         out_port = self.mac_to_port[datapath.id].get(eth_pkt.dst)
-	#What is the difference if we know the mac address and if we don't
+        #What is the difference if we know the mac address and if we don't
         if out_port is not None:
             #TODO: 1) What is the eth_dst parameter in the match?
             match = parser.OFPMatch(in_port=in_port, eth_dst=eth_pkt.dst,
@@ -231,7 +231,7 @@ class ProjectController(app_manager.RyuApp):
 	    TODO
 	    Multi Path Transmission
 	    It behaves as a load balancer for the topology of the workshop
-	'''
+        '''
         #TODO: Complete switch one
         
     #TODO: 1) What is the event here and what is the difference with the CONFIG_DISPATCHER in the previous function? 
@@ -251,7 +251,7 @@ class ProjectController(app_manager.RyuApp):
         in_port = msg.match['in_port']
 
         # create a Packet object out of the payload
-	# TODO: 1) Create a Packet from the message data 
+        # TODO: 1) Create a Packet from the message data
         pkt = 
 
         # TODO: 1) Why do we need obtain the information for four different protocols?
